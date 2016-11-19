@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!--
+	Photon by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Photon by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<div class="inner">
+					<span class="icon major fa-cloud"></span>
+					<h1>Hi, I'm <strong>Eva</strong>, let me<br />
+					help you prepare for you next interview. <a href="http://html5up.net">Try me</a>.</h1>
+					<p>Learn to Interview, Speak with Matter, and Empower your Better Self.</p>
+					<ul class="actions">
+						<li><a href="#four" class="button scrolly">Discover</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Four -->
+			<section id="four" class="main style2 special" style="background-color: white !important;background-image: none;">
+				<div class="container">
+					<header class="major">
+						<h2 style="color: black">Get some practice before your big interview for Free!</h2>
+					</header>
+					<p style="color: black">Do you want response from a professional? Try you me</p>
+					<ul class="actions uniform">
+						<li style="color: black;border: 1px solid #529ea0;border-radius: 5px;"><a href="#" style="color: black!important; " class="button"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp; AI Mock Interview</a></li>
+						<li style="color: black;border: 1px solid #529ea0;border-radius: 5px;"><a href="#" style="color: black!important; " class="button"><i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; YouVid</a></li>
+					</ul>
+					<ul class="actions uniform">
+						<li style="color: black;"><a href="#" class="button special">Sign Up</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<section id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon alt fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+
+
+<script>
+
+function ctrl($scope){
+      $scope.rows = ['Paul','John','Lucie'];
+      $scope.temp = false;
+
+
+
+      $scope.addRow = function(){
+        $scope.temp = false;
+        $scope.addName="";
+      };
+      
+      $scope.deleteRow = function(row){
+        $scope.rows.splice($scope.rows.indexOf(row),1);
+      };
+      
+      $scope.plural = function (tab){
+        return tab.length > 1 ? 's': ''; 
+      };
+      
+      $scope.addTemp = function(){
+        if($scope.temp) $scope.rows.pop(); 
+        else if($scope.addName) $scope.temp = true;
+        
+        if($scope.addName) $scope.rows.push($scope.addName);
+        else $scope.temp = false;
+      };
+      
+      $scope.isTemp = function(i){
+        return i==$scope.rows.length-1 && $scope.temp;
+      };
+      
+}
+
+
+if (annyang) {
+  console.log('do stuff');
+  // Let's define our first command. First the text we expect, and then the function it should call
+  var commands = {
+    'hi Eva': function() {
+        console.log('do stuff');
+       responsiveVoice.speak('Hi how is it going');
+    },
+    'can you help me with a job interview' : function() {
+       responsiveVoice.speak('Yeah! How can I help you prepare');
+    }
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.debug(true);
+  annyang.start();
+}
+</script>
