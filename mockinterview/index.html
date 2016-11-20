@@ -4,48 +4,42 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html ng-app="myApp">
 	<head>
-		<title>Photon by HTML5 UP</title>
+		<title>EVA mockinterview</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.5.0/annyang.min.js"></script>
+		<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	</head>
-	<body>
+	<body ng-controller="myCtrl">
 
 		<!-- Header -->
-			<section id="header">
+			<section id="header" style="padding: 30px;">
 				<div class="inner">
 					<span class="icon major fa-cloud"></span>
-					<h1>Hi, I'm <strong>Eva</strong>, let me<br />
-					help you prepare for you next interview. <a href="http://html5up.net">Try me</a>.</h1>
-					<p>Learn to Interview, Speak with Matter, and Empower your Better Self.</p>
-					<ul class="actions">
-						<li><a href="#four" class="button scrolly">Discover</a></li>
-					</ul>
+					<h1>Start with <strong>'Hi Eva'</strong><br/>
 				</div>
 			</section>
 
 		<!-- Four -->
 			<section id="four" class="main style2 special" style="background-color: white !important;background-image: none;">
-				<div class="container">
-					<header class="major">
-						<h2 style="color: black">Get some practice before your big interview for Free!</h2>
-					</header>
-					<p style="color: black">Do you want response from a professional? Try you me</p>
-					<ul class="actions uniform">
-						<li style="color: black;border: 1px solid #529ea0;border-radius: 5px;"><a href="#" style="color: black!important; " class="button"><i class="fa fa-user-o" aria-hidden="true"></i>&nbsp; AI Mock Interview</a></li>
-						<li style="color: black;border: 1px solid #529ea0;border-radius: 5px;"><a href="#" style="color: black!important; " class="button"><i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp; YouVid</a></li>
-					</ul>
-					<ul class="actions uniform">
-						<li style="color: black;"><a href="#" class="button special">Sign Up</a></li>
-					</ul>
+				<div style="display: table; width: 100%; padding: 10px 40px;">
+					<div style="display: inline-block; width: 50%; vertical-align: top;">
+							<video id="video" width="720" height="480" autoplay></video>
+					</div>
+					<div id="responses" style="display: inline-block;max-height: 480px;overflow: scroll;width: 50%;vertical-align: top;">
+					</div>
+					<div id="showResult"><img style="width: 100%;" class="img-responsive" src="../images/yah.png"></div>
 				</div>
 			</section>
+
 
 		<!-- Footer -->
 			<section id="footer">
@@ -62,12 +56,12 @@
 			</section>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
 
 	</body>
 </html>
@@ -75,51 +69,66 @@
 
 <script>
 
-function ctrl($scope){
-      $scope.rows = ['Paul','John','Lucie'];
-      $scope.temp = false;
+// Grab elements, create settings, etc.
+var video = document.getElementById('video');
 
-
-
-      $scope.addRow = function(){
-        $scope.temp = false;
-        $scope.addName="";
-      };
-      
-      $scope.deleteRow = function(row){
-        $scope.rows.splice($scope.rows.indexOf(row),1);
-      };
-      
-      $scope.plural = function (tab){
-        return tab.length > 1 ? 's': ''; 
-      };
-      
-      $scope.addTemp = function(){
-        if($scope.temp) $scope.rows.pop(); 
-        else if($scope.addName) $scope.temp = true;
-        
-        if($scope.addName) $scope.rows.push($scope.addName);
-        else $scope.temp = false;
-      };
-      
-      $scope.isTemp = function(i){
-        return i==$scope.rows.length-1 && $scope.temp;
-      };
-      
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
+    });
 }
 
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName = "John";
+    $scope.lastName = "Doe";
+});
 
 if (annyang) {
   console.log('do stuff');
   // Let's define our first command. First the text we expect, and then the function it should call
   var commands = {
     'hi Eva': function() {
-        console.log('do stuff');
+    	$( "#responses" ).append( "<div class='personalResponse' style='padding: 10px; text-align: right; color: gray !important; font-size: 30px;'>hi Eva</div>" );
+		$( "#responses" ).append( "<div class='evaResponse' style='padding: 10px; text-align: left; font-size: 30px;'><span style='color: #4360b3 !important;'> EVA:</span> <span style='color: #4360b3 !important;'>Hi how is it going?</span> </div>" );
+
        responsiveVoice.speak('Hi how is it going');
+       $("#responses").animate({ scrollTop: $("#responses").height() }, "slow");
     },
-    'can you help me with a job interview' : function() {
-       responsiveVoice.speak('Yeah! How can I help you prepare');
+    'I have an interview in nursing' : function() {
+    	$( "#responses" ).append( "<div class='personalResponse' style='padding: 10px; text-align: right; color: gray !important; font-size: 30px;'>I have an interview in nursing?</div>" );
+
+       responsiveVoice.speak('Ok, I have some questions. Are you ready?');
+
+       $( "#responses" ).append( "<div class='evaResponse' style='padding: 10px; text-align: left; font-size: 30px;'><span style='color: #4360b3 !important;'> EVA:</span> <span style='color: #4360b3 !important;'>Ok, I have some questions. Are you ready?</span> </div>" );
+
+       $("#responses").animate({ scrollTop: $("#responses").height() }, "slow");
+    },
+    'yes' : function() {
+    	$( "#responses" ).append( "<div class='personalResponse' style='padding: 10px; text-align: right; color: gray !important; font-size: 30px;'>Yes</div>" );
+
+    	responsiveVoice.speak('Tell me about a time that you took the lead on a difficult project.');
+
+       $( "#responses" ).append( "<div class='evaResponse' style='padding: 10px; text-align: left; font-size: 30px;'><span style='color: #4360b3 !important;'> EVA:</span> <span style='color: #4360b3 !important;'>Tell me about a time that you took the lead on a difficult project.</span> </div>" );
+
+       $("#responses").animate({ scrollTop: $("#responses").height() }, "slow");
+    },
+    'thank you Eva' : function() {
+    	$( "#responses" ).append( "<div class='personalResponse' style='padding: 10px; text-align: right; color: gray !important; font-size: 30px;'>Thank you Eva.</div>" );
+
+    	responsiveVoice.speak('No Problem. Good luck on your interview!');
+
+       $( "#responses" ).append( "<div class='evaResponse' style='padding: 10px; text-align: left; font-size: 30px;'><span style='color: #4360b3 !important;'> EVA:</span> <span style='color: #4360b3 !important;'>No Problem. Good luck on your interview!</span> </div>" );
+
+       $(" #showResult ").show();
+       $(" #responses ").hide();
+
+       $("#responses").animate({ scrollTop: $("#responses").height() }, "slow");
     }
+
   };
 
   // Add our commands to annyang
